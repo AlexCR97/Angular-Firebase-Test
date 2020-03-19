@@ -1,0 +1,68 @@
+<!-- profile container -->
+<div class="profile-container py-3 d-flex justify-content-center">
+
+    <!-- profile card -->
+    <div class="profile-card card shadow">
+
+        <!--profile card header -->
+        <div class="card-header d-flex flex-column align-items-center">
+            <img class="profile-img rounded-circle mb-3" src="imgUrl">
+            <img [src]="imgUrl | async" class="profile-img rounded-circle mb-3"/>
+
+            <div *ngIf="uploadingImg" class="spinner-grow text-primary" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+
+            <button *ngIf="!uploadingImg" class="btn btn-primary btn-block" onclick="document.getElementById('inputSelectImage').click();">Cambiar imagen</button>
+            <input type="file" accept="image/*" id="inputSelectImage" style="display: none;" (change)="onInputSelectImage($event)">
+        </div><!--profile card header -->
+
+        <!-- profile card body -->
+        <div class="card-body">
+
+            <!-- show user data -->
+            <ul class="list-group" *ngIf="!editProfile">
+                <li class="list-group-item">
+                    <h6>Nombre de usuario</h6>
+                    <p *ngIf="user.username">{{user.username}}</p>
+                    <p *ngIf="!user.username" class="font-italic">No tienes nombre de usuario</p>
+                </li>
+                <li class="list-group-item">
+                    <h6>Sobre mi</h6>
+                    <p *ngIf="user.aboutme">{{user.aboutme}}</p>
+                    <p *ngIf="!user.aboutme" class="font-italic">Escribe algo sobre ti</p>
+                </li>
+            </ul><!-- show user data -->
+
+            <!-- edit user data -->
+            <ul class="list-group" *ngIf="editProfile">
+                <form [formGroup]="formGroup">
+                    <li class="list-group-item">
+                        <div class="form-group">
+                            <label><h6>Nombre de usuario</h6></label>
+                            <input type="text" class="form-control form-control-sm" formControlName="username">
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="form-group">
+                            <label><h6>Sobre mi</h6></label>
+                            <input type="text" class="form-control form-control-sm" formControlName="aboutme">
+                        </div>
+                    </li>
+                </form>
+            </ul><!-- edit user data -->
+
+        </div><!-- profile card body -->
+
+        <!-- profile card footer -->
+        <div class="card-footer">
+            <button *ngIf="!editProfile" class="btn btn-primary btn-block" (click)="setEditProfile(true)">Editar perfil</button>
+
+            <form [formGroup]="formGroup" (ngSubmit)="onSubmitEditProfile()">
+                <button *ngIf="editProfile" class="btn btn-info btn-block" type="submit">Confirmar</button>
+            </form>
+        </div><!-- profile card footer -->
+
+    </div><!-- profile card -->
+
+</div><!-- profile container -->

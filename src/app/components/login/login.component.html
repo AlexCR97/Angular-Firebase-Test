@@ -1,0 +1,39 @@
+<div class="login-container d-flex justify-content-center">
+
+    <!-- login card -->
+    <div class="login-card card shadow">
+
+        <div class="card-header">
+            <h4 class="text-center">Inicia sesión</h4>
+        </div>
+
+        <div class="card-body">
+            <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+
+                <!-- correo -->
+                <div class="form-group">
+                    <input type="email" class="form-control" placeholder="Correo" formControlName="correo">
+                </div>
+                
+                <!-- contrasena -->
+                <div class="form-group">
+                    <input type="password" class="form-control" placeholder="Contraseña" formControlName="contrasena">
+                </div>
+            
+                <!-- iniciar sesion -->
+                <button class="btn btn-primary btn-block" type="submit">Iniciar Sesión</button>
+
+            </form>
+
+            <!-- test -->
+            <button class="btn btn-primary btn-block" type="button" (click)="testAsync()">Test</button>
+        </div>
+
+        <div class="card-footer">
+            <p class="text-center">¿No tienes una cuenta? <a href="sign-in">Regístrate</a></p>
+            <p class="text-center">O inicia sesión con <a href="#">Google</a></p>
+        </div>
+
+    </div><!-- login card container -->
+
+</div>

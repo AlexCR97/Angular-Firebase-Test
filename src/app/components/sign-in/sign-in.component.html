@@ -1,0 +1,80 @@
+<div class="sign-in-container d-flex flex-column align-items-center">
+
+    <div class="d-flex justify-content-center mb-5" *ngIf="isLoading">
+        <div class="spinner-grow text-primary" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+
+    <!-- switch card -->
+    <div [ngSwitch]="switchCard">
+
+        <!-- correo card -->
+        <div class="sign-in-card card shadow" *ngSwitchCase="'correo'">
+            
+            <div class="card-header">
+                <h4 class="text-center">Regístrate</h4>
+            </div>
+            
+            <div class="card-body">
+                <form [formGroup]="formGroup" (ngSubmit)="onSubmitCorreo()">
+
+                    <p>Ingresa tu correo</p>
+                    
+                    <!-- correo -->
+                    <div class="form-group">
+                        <input type="email" class="form-control" placeholder="Correo" formControlName="correo">
+                    </div>
+                    
+                    <button class="btn btn-primary btn-block" type="submit">Siguiente</button>
+                </form>
+            </div>
+            
+            <div class="card-footer">
+                <p class="text-center">¿Ya tienes una cuenta? <a href="login">Inicia Sesión</a></p>
+            </div>
+            
+        </div><!-- correo card -->
+
+        <!-- contrasena card -->
+        <div class="sign-in-card card shadow" *ngSwitchCase="'contrasena'">
+            
+            <div class="card-header">
+                <h4 class="text-center">Regístrate</h4>
+            </div>
+            
+            <div class="card-body">
+                <form [formGroup]="formGroup" (ngSubmit)="onSubmitContrasena()">
+
+                    <h5 class="text-center">
+                        <span class="badge badge-secondary badge-pill">{{formGroup.value.correo}}</span>
+                    </h5>
+                    
+                    <p class="text-center">¿No eres tu? <span class="cambiar-correo text-primary" (click)="setCard('correo')">Cambia tu correo</span></p>
+                    
+                    <p>Crea tu contraseña</p>
+                    
+                    <!-- contrasena -->
+                    <div class="form-group">
+                        <input type="password" class="form-control" placeholder="Contraseña" formControlName="contrasena">
+                    </div>
+                    
+                    <!-- confirmar contrasena -->
+                    <p>Confirma tu contraseña</p>
+                    <div class="form-group">
+                        <input type="password" class="form-control" placeholder="Confirmar contraseña" formControlName="confirmarContrasena">
+                    </div>
+                    
+                    <button class="btn btn-primary btn-block" type="submit">Confirmar</button>
+                </form>
+            </div>
+            
+            <div class="card-footer">
+                <p class="text-center">¿Ya tienes una cuenta? <a href="login">Inicia Sesión</a></p>
+            </div>
+            
+        </div><!-- contrasena card -->
+
+    </div><!-- switch card -->
+    
+</div>
